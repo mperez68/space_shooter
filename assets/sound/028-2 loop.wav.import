@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://dglnbus0bqql8"
+path="res://.godot/imported/028-2 loop.wav-57504b60aef72ddc2561d613943f068d.sample"
+
+[deps]
+
+source_file="res://assets/sound/028-2 loop.wav"
+dest_files=["res://.godot/imported/028-2 loop.wav-57504b60aef72ddc2561d613943f068d.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=2
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

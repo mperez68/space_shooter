@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://uilcb20tsc1n"
+path="res://.godot/imported/robot-moving-driving-takeoff-motor-sound-12-different-ses-109030 R.wav-a0ce96260fc74fac3eb8830920e84b8e.sample"
+
+[deps]
+
+source_file="res://assets/sound/jump Project/Samples/Processed/Reverse/robot-moving-driving-takeoff-motor-sound-12-different-ses-109030 R.wav"
+dest_files=["res://.godot/imported/robot-moving-driving-takeoff-motor-sound-12-different-ses-109030 R.wav-a0ce96260fc74fac3eb8830920e84b8e.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0
