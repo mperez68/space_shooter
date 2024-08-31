@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://c6brlptkt1vtb"
+path="res://.godot/imported/071 intro.wav-2194e6f1609142ab6af05fa02f859ce5.sample"
+
+[deps]
+
+source_file="res://assets/sound/071 intro.wav"
+dest_files=["res://.godot/imported/071 intro.wav-2194e6f1609142ab6af05fa02f859ce5.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

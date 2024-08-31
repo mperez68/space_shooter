@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://djh2i44nypisc"]
+
+[node name="HUD" type="CanvasLayer"]
+
+[node name="BoostBar" type="ProgressBar" parent="."]
+offset_left = 25.0
+offset_top = 25.0
+offset_right = 325.0
+offset_bottom = 75.0
+value = 60.0
+show_percentage = false

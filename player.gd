@@ -1,11 +1,11 @@
 extends CharacterBody3D
 
-enum AUDIO{ JUMP, BOOST, LAND, SHOOT, WALKING }
 enum STATE{ GROUND, RISING, FALLING }
 
 const WALK_SPEED = 5.0
 const SPRINT_SPEED = 8.0
 const JUMP_VELOCITY = 6.0
+const BOOST_VELOCITY = 18.0
 const AIRBORNE_MULTIPLIER = 3.0
 const INERTIA_MULTIPLIER = 8.0
 const BASE_FOV = 75.0
@@ -27,6 +27,7 @@ var last_bob_y = []
 
 @onready var head = $Head
 @onready var camera = $Head/Camera3D
+@onready var sfx = $SfxManager
 
 func _ready() -> void:
 	# lock mouse
@@ -40,6 +41,11 @@ func _unhandled_input(event: InputEvent) -> void:
 	elif event.is_action_pressed("ui_cancel"):
 		get_tree().quit()
 
+# HUD/general tracking
+func _process(delta: float) -> void:
+	$HUD/BoostBar.value = $HUD/BoostBar.max_value -($HUD/BoostBar.max_value * ($BoostTimer.time_left / $BoostTimer.wait_time))
+
+# Controls/physics
 func _physics_process(delta: float) -> void:
 	# Add the gravity.
 	if not is_on_floor():
@@ -53,22 +59,11 @@ func _physics_process(delta: float) -> void:
 	else:
 		speed = WALK_SPEED
 
-	# Handle jump.
-	if Input.is_action_just_pressed("ui_accept"):
-		if is_on_floor():
-			velocity.y = JUMP_VELOCITY
-			_audio(AUDIO.JUMP)
-			change_state(STATE.RISING)
-		elif boosts > 0:
-			boosts -= 1
-			velocity.y = JUMP_VELOCITY
-			_audio(AUDIO.BOOST)
-			change_state(STATE.RISING)
-
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
 	var input_dir := Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
 	var direction = (head.transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
+	
 	if is_on_floor():
 		change_state(STATE.GROUND)
 		if direction:
@@ -81,7 +76,35 @@ func _physics_process(delta: float) -> void:
 		velocity.x = lerp(velocity.x, direction.x * speed, delta * AIRBORNE_MULTIPLIER)
 		velocity.z = lerp(velocity.z, direction.z * speed, delta * AIRBORNE_MULTIPLIER)
 	
+	# Cap speed
 	velocity.limit_length(speed)
+
+	# Handle jump.
+	if Input.is_action_just_pressed("ui_accept"):
+		if is_on_floor():
+			sfx.play(sfx.AUDIO.JUMP)
+			velocity.y = JUMP_VELOCITY
+			change_state(STATE.RISING)
+		elif boosts > 0:
+			boosts -= 1
+			sfx.play(sfx.AUDIO.BOOST)
+			velocity.y = JUMP_VELOCITY
+			change_state(STATE.RISING)
+	
+	# Handle Strafe boost.
+	var strafe = Vector3(0, 0, 0)
+	if Input.is_action_just_pressed("strafe_left"):
+		strafe = (head.transform.basis * Vector3(-1, 0, 0)).normalized()
+	elif Input.is_action_just_pressed("strafe_right"):
+		strafe = (head.transform.basis * Vector3(1, 0, 0)).normalized()
+	if strafe.length() > 0 and boosts > 0:
+		velocity.y += JUMP_VELOCITY / 3
+		velocity.x += strafe.x * BOOST_VELOCITY
+		velocity.z += strafe.z * BOOST_VELOCITY
+		boosts -= 1
+		change_state(STATE.RISING)
+		sfx.play(sfx.AUDIO.BOOST)
+		
 	
 	# Head Bob
 	t_bob += delta * velocity.length() * float(is_on_floor())
@@ -89,15 +112,10 @@ func _physics_process(delta: float) -> void:
 	
 	# walk sound if bottom of walk bobbing wave
 	if camera.transform.origin.y < -BOB_AMP * 0.9 and direction:
-		_audio(AUDIO.WALKING)
+		sfx.play(sfx.AUDIO.WALKING)
 		restart_walk = false
 	if camera.transform.origin.y > BOB_AMP * 0.9 and direction:
 		restart_walk = true
-	
-	# FOV
-	var velocity_clamped = clamp(velocity.x, 0.5, SPRINT_SPEED * 4)
-	var target_fov = BASE_FOV + FOV_CHANGE * velocity_clamped
-	camera.fov = lerp(camera.fov, target_fov, delta * 8.0)
 
 	move_and_slide()
 
@@ -108,12 +126,15 @@ func change_state(new_state: STATE):
 	
 	# do stuff on state change
 	if state == STATE.GROUND and new_state == STATE.RISING:
-		_audio(AUDIO.JUMP)
+		sfx.play(sfx.AUDIO.JUMP)
+		if !$BoostTimer.is_stopped():
+			$BoostTimer.stop()
 	
 	if state == STATE.FALLING and new_state == STATE.GROUND:
-		_audio(AUDIO.LAND)
+		sfx.play(sfx.AUDIO.LAND)
 		t_bob = 7*PI/8
-		boosts = MAX_BOOSTS
+		if $BoostTimer.is_stopped() and boosts != MAX_BOOSTS:
+			$BoostTimer.start()
 	
 	# update
 	state = new_state
@@ -126,22 +147,5 @@ func _headbob(time) -> Vector3:
 	
 	return pos
 
-func _audio(a: AUDIO, stop = false):
-	var sel: AudioStreamPlayer3D
-	match a:
-		AUDIO.JUMP:
-			sel = $Jump
-		AUDIO.BOOST:
-			sel = $Boost
-		AUDIO.LAND:
-			sel = $Land
-		AUDIO.WALKING:
-			if restart_walk:
-				$Walk.stop()
-			elif $Walk.is_playing():
-				return
-			sel = $Walk
-	if (stop):
-		sel.stop()
-	else:
-		sel.play()
+func _on_boost_timer_timeout():
+	boosts = MAX_BOOSTS

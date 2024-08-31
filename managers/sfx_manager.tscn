@@ -1,0 +1,24 @@
+[gd_scene load_steps=6 format=3 uid="uid://c61y28s47jel1"]
+
+[ext_resource type="Script" path="res://managers/sfx_manager.gd" id="1_65gnp"]
+[ext_resource type="AudioStream" uid="uid://dxba007lodhwq" path="res://assets/sound/jump.wav" id="1_j5apd"]
+[ext_resource type="AudioStream" uid="uid://c75thfp22x4y6" path="res://assets/sound/land.wav" id="2_wgsef"]
+[ext_resource type="AudioStream" uid="uid://dcntg05buystx" path="res://assets/sound/walk.wav" id="3_v3t8p"]
+[ext_resource type="AudioStream" uid="uid://bk28n62jc47pm" path="res://assets/sound/boost.wav" id="4_vyhx8"]
+
+[node name="SfxManager" type="Node3D"]
+script = ExtResource("1_65gnp")
+
+[node name="Jump" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("1_j5apd")
+
+[node name="Land" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("2_wgsef")
+
+[node name="Walk" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("3_v3t8p")
+volume_db = -17.0
+pitch_scale = 0.81
+
+[node name="Boost" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("4_vyhx8")
