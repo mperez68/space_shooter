@@ -1,10 +1,7 @@
-[gd_scene load_steps=8 format=3 uid="uid://c5e0705bd4bop"]
+[gd_scene load_steps=7 format=3 uid="uid://d18i0qf4o05eh"]
 
-[ext_resource type="PackedScene" uid="uid://drxsumn5rwvgy" path="res://player.tscn" id="1_201ab"]
-[ext_resource type="PackedScene" uid="uid://b5jqk57hvukn4" path="res://managers/music_manager.tscn" id="2_2sv6e"]
-
-[sub_resource type="Environment" id="Environment_buyw3"]
-ambient_light_source = 3
+[ext_resource type="PackedScene" uid="uid://c5e0705bd4bop" path="res://level.tscn" id="1_ue2qo"]
+[ext_resource type="PackedScene" uid="uid://drxsumn5rwvgy" path="res://player.tscn" id="2_jmvph"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nsa6q"]
 albedo_color = Color(0.182764, 0.482239, 0, 1)
@@ -18,111 +15,104 @@ albedo_color = Color(0.100143, 0.321488, 1, 1)
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ltaye"]
 albedo_color = Color(0.725684, 0, 0.18309, 1)
 
-[node name="World" type="Node3D"]
+[node name="DebugMap" type="Node3D"]
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(0.866025, -0.25, -0.433013, 0, -0.866025, 0.5, -0.5, -0.433013, -0.75, -8, 8.8737, -9)
-light_energy = 3.0
-light_indirect_energy = 10.0
-shadow_enabled = true
+[node name="Level" parent="." instance=ExtResource("1_ue2qo")]
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource("Environment_buyw3")
+[node name="Terrain" type="Node" parent="Level"]
 
-[node name="Floor" type="CSGBox3D" parent="."]
+[node name="Floor" type="CSGBox3D" parent="Level/Terrain"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0494918, 0.5)
 use_collision = true
 size = Vector3(100, 0.001, 100)
 material = SubResource("StandardMaterial3D_nsa6q")
 
-[node name="Walls" type="Node3D" parent="."]
+[node name="Walls" type="Node3D" parent="Level/Terrain"]
 
-[node name="Wall1" type="CSGBox3D" parent="Walls"]
+[node name="Wall1" type="CSGBox3D" parent="Level/Terrain/Walls"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 1.54899, 0.5)
 use_collision = true
 size = Vector3(2, 3, 30)
 material = SubResource("StandardMaterial3D_nsa6q")
 
-[node name="Wall2" type="CSGBox3D" parent="Walls"]
+[node name="Wall2" type="CSGBox3D" parent="Level/Terrain/Walls"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15, 1.54899, 0.5)
 use_collision = true
 size = Vector3(2, 3, 30)
 material = SubResource("StandardMaterial3D_nsa6q")
 
-[node name="Wall3" type="CSGBox3D" parent="Walls"]
+[node name="Wall3" type="CSGBox3D" parent="Level/Terrain/Walls"]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 1.54899, -14.5)
 use_collision = true
 size = Vector3(2, 3, 30)
 material = SubResource("StandardMaterial3D_nsa6q")
 
-[node name="Wall4" type="CSGBox3D" parent="Walls"]
+[node name="Wall4" type="CSGBox3D" parent="Level/Terrain/Walls"]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 1.54899, 15.5)
 use_collision = true
 size = Vector3(2, 3, 30)
 material = SubResource("StandardMaterial3D_nsa6q")
 
-[node name="Wall5" type="CSGBox3D" parent="Walls"]
+[node name="Wall5" type="CSGBox3D" parent="Level/Terrain/Walls"]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 1.54899, -49.5)
 use_collision = true
 size = Vector3(2, 3, 100)
 material = SubResource("StandardMaterial3D_nsa6q")
 
-[node name="Wall6" type="CSGBox3D" parent="Walls"]
+[node name="Wall6" type="CSGBox3D" parent="Level/Terrain/Walls"]
 transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 50, 1.54899, 0.5)
 use_collision = true
 size = Vector3(2, 3, 100)
 material = SubResource("StandardMaterial3D_nsa6q")
 
-[node name="Wall7" type="CSGBox3D" parent="Walls"]
+[node name="Wall7" type="CSGBox3D" parent="Level/Terrain/Walls"]
 transform = Transform3D(1.31134e-07, 0, 1, 0, 1, 0, -1, 0, 1.31134e-07, 0, 1.54899, 50.5)
 use_collision = true
 size = Vector3(2, 3, 100)
 material = SubResource("StandardMaterial3D_nsa6q")
 
-[node name="Wall8" type="CSGBox3D" parent="Walls"]
+[node name="Wall8" type="CSGBox3D" parent="Level/Terrain/Walls"]
 transform = Transform3D(1, 0, -1.74846e-07, 0, 1, 0, 1.74846e-07, 0, 1, -51, 1.54899, 0.5)
 use_collision = true
 size = Vector3(2, 3, 100)
 material = SubResource("StandardMaterial3D_nsa6q")
 
-[node name="Boxes" type="Node3D" parent="."]
+[node name="Boxes" type="Node3D" parent="Level/Terrain"]
 
-[node name="Box3" type="CSGBox3D" parent="Boxes"]
+[node name="Box3" type="CSGBox3D" parent="Level/Terrain/Boxes"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.5, 1.54899, 9)
 use_collision = true
 size = Vector3(5, 3, 5)
 material = SubResource("StandardMaterial3D_i01de")
 
-[node name="Box4" type="CSGBox3D" parent="Boxes"]
+[node name="Box4" type="CSGBox3D" parent="Level/Terrain/Boxes"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -35.5, 2.54899, 20)
 use_collision = true
 size = Vector3(5, 5, 5)
 material = SubResource("StandardMaterial3D_i01de")
 
-[node name="Box2" type="CSGBox3D" parent="Boxes"]
+[node name="Box2" type="CSGBox3D" parent="Level/Terrain/Boxes"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.5, 1.04899, 1)
 use_collision = true
 size = Vector3(5, 2, 5)
 material = SubResource("StandardMaterial3D_v1a8m")
 
-[node name="Box5" type="CSGBox3D" parent="Boxes"]
+[node name="Box5" type="CSGBox3D" parent="Level/Terrain/Boxes"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -36.5, 1.04899, 1)
 use_collision = true
 size = Vector3(5, 3, 5)
 material = SubResource("StandardMaterial3D_v1a8m")
 
-[node name="Box1" type="CSGBox3D" parent="Boxes"]
+[node name="Box1" type="CSGBox3D" parent="Level/Terrain/Boxes"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.5, 0.548992, -7)
 use_collision = true
 size = Vector3(5, 1, 5)
 material = SubResource("StandardMaterial3D_ltaye")
 
-[node name="Box6" type="CSGBox3D" parent="Boxes"]
+[node name="Box6" type="CSGBox3D" parent="Level/Terrain/Boxes"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -37.5, 0.548992, -18)
 use_collision = true
 size = Vector3(5, 1, 5)
 material = SubResource("StandardMaterial3D_ltaye")
 
-[node name="Player" parent="." instance=ExtResource("1_201ab")]
-
-[node name="MusicManager" parent="." instance=ExtResource("2_2sv6e")]
+[node name="Player" parent="Level" instance=ExtResource("2_jmvph")]

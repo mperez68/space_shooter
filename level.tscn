@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://c5e0705bd4bop"]
+
+[ext_resource type="PackedScene" uid="uid://b5jqk57hvukn4" path="res://managers/music_manager.tscn" id="1_8elko"]
+
+[sub_resource type="Environment" id="Environment_buyw3"]
+ambient_light_source = 3
+
+[node name="Level" type="Node3D"]
+
+[node name="MusicManager" parent="." instance=ExtResource("1_8elko")]
+
+[node name="Skybox" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_buyw3")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.866025, -0.25, -0.433013, 0, -0.866025, 0.5, -0.5, -0.433013, -0.75, -8, 8.8737, -9)
+light_energy = 3.0
+light_indirect_energy = 10.0
+shadow_enabled = true

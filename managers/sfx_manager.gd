@@ -6,6 +6,7 @@ enum AUDIO{ JUMP, BOOST, LAND, SHOOT, WALKING }
 @onready var land = $Land
 @onready var walk = $Walk
 @onready var boost = $Boost
+@onready var shoot = $Shoot
 
 func play(a: AUDIO, stop = false):
 	var sel: AudioStreamPlayer3D
@@ -16,6 +17,8 @@ func play(a: AUDIO, stop = false):
 			sel = $Boost
 		AUDIO.LAND:
 			sel = $Land
+		AUDIO.SHOOT:
+			sel = $Shoot
 		AUDIO.WALKING:
 			sel = $Walk
 	if (stop):

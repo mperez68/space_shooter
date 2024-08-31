@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://c61y28s47jel1"]
+[gd_scene load_steps=7 format=3 uid="uid://c61y28s47jel1"]
 
 [ext_resource type="Script" path="res://managers/sfx_manager.gd" id="1_65gnp"]
 [ext_resource type="AudioStream" uid="uid://dxba007lodhwq" path="res://assets/sound/jump.wav" id="1_j5apd"]
 [ext_resource type="AudioStream" uid="uid://c75thfp22x4y6" path="res://assets/sound/land.wav" id="2_wgsef"]
 [ext_resource type="AudioStream" uid="uid://dcntg05buystx" path="res://assets/sound/walk.wav" id="3_v3t8p"]
 [ext_resource type="AudioStream" uid="uid://bk28n62jc47pm" path="res://assets/sound/boost.wav" id="4_vyhx8"]
+[ext_resource type="AudioStream" uid="uid://by28i868sib2i" path="res://assets/sound/short_fire.wav" id="6_aev0g"]
 
 [node name="SfxManager" type="Node3D"]
 script = ExtResource("1_65gnp")
@@ -22,3 +23,6 @@ pitch_scale = 0.81
 
 [node name="Boost" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("4_vyhx8")
+
+[node name="Shoot" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("6_aev0g")

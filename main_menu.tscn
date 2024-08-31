@@ -1,0 +1,61 @@
+[gd_scene load_steps=3 format=3 uid="uid://cbemwcvyuq6pw"]
+
+[ext_resource type="Script" path="res://main_menu.gd" id="1_hrbmq"]
+[ext_resource type="PackedScene" uid="uid://cj1qqror4vphj" path="res://managers/SettingsManager.tscn" id="2_4e4og"]
+
+[node name="MainMenu" type="Node2D"]
+script = ExtResource("1_hrbmq")
+
+[node name="FadeTimer" type="Timer" parent="."]
+
+[node name="Main" type="CanvasLayer" parent="."]
+
+[node name="Label" type="Label" parent="Main"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -44.0
+offset_top = -11.5
+offset_right = -44.0
+offset_bottom = -11.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "Main Menu"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Settings" type="CanvasLayer" parent="."]
+visible = false
+
+[node name="SettingsManager" parent="Settings" instance=ExtResource("2_4e4og")]
+
+[node name="Label" type="Label" parent="Settings"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -44.0
+offset_top = -11.5
+offset_right = -44.0
+offset_bottom = -11.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "Settings"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="LevelSelect" type="CanvasLayer" parent="."]
+visible = false
+
+[node name="Label" type="Label" parent="LevelSelect"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -44.0
+offset_top = -11.5
+offset_right = -44.0
+offset_bottom = -11.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "Level Select"
+horizontal_alignment = 1
+vertical_alignment = 1
