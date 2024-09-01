@@ -24,6 +24,6 @@ func end_level(success: bool):
 	# TODO SPC-25: display debrief, make buttons for next level or return to menu
 	print(next_level)
 	if next_level == null:
-		get_tree().change_scene_to_file("res://main_menu.tscn")
+		get_tree().change_scene_to_file("res://menu/main_menu.tscn")
 	else:
 		get_tree().change_scene_to_packed(next_level)

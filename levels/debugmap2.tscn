@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://wregww8dg177"]
 
-[ext_resource type="PackedScene" uid="uid://c5e0705bd4bop" path="res://level.tscn" id="1_x8vy8"]
-[ext_resource type="PackedScene" uid="uid://drxsumn5rwvgy" path="res://player.tscn" id="3_nkvp1"]
+[ext_resource type="PackedScene" uid="uid://c5e0705bd4bop" path="res://levels/level.tscn" id="1_x8vy8"]
+[ext_resource type="PackedScene" uid="uid://drxsumn5rwvgy" path="res://units/player.tscn" id="3_nkvp1"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nsa6q"]
 albedo_color = Color(0.182764, 0.482239, 0, 1)

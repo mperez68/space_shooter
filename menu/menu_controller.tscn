@@ -1,13 +1,13 @@
 [gd_scene load_steps=11 format=3 uid="uid://cbemwcvyuq6pw"]
 
-[ext_resource type="Script" path="res://menu_controller.gd" id="1_8nrub"]
-[ext_resource type="PackedScene" uid="uid://cn2758e84mwp8" path="res://abstract_menu.tscn" id="3_rcvll"]
-[ext_resource type="Script" path="res://main_menu.gd" id="4_sdk8b"]
+[ext_resource type="Script" path="res://menu/menu_controller.gd" id="1_8nrub"]
+[ext_resource type="PackedScene" uid="uid://cn2758e84mwp8" path="res://menu/abstract_menu.tscn" id="3_rcvll"]
+[ext_resource type="Script" path="res://menu/main_menu.gd" id="4_sdk8b"]
 [ext_resource type="PackedScene" uid="uid://cj1qqror4vphj" path="res://managers/SettingsManager.tscn" id="4_tj4f8"]
-[ext_resource type="Script" path="res://char_select_menu.gd" id="5_bp2q6"]
-[ext_resource type="Script" path="res://mission_select_menu.gd" id="6_wkak2"]
-[ext_resource type="Script" path="res://settings_menu.gd" id="7_omgki"]
-[ext_resource type="Script" path="res://in_game_menu.gd" id="8_egr1j"]
+[ext_resource type="Script" path="res://menu/char_select_menu.gd" id="5_bp2q6"]
+[ext_resource type="Script" path="res://menu/mission_select_menu.gd" id="6_wkak2"]
+[ext_resource type="Script" path="res://menu/settings_menu.gd" id="7_omgki"]
+[ext_resource type="Script" path="res://menu/in_game_menu.gd" id="8_egr1j"]
 
 [sub_resource type="Gradient" id="Gradient_u20ar"]
 colors = PackedColorArray(0, 0, 0.137255, 1, 0.109804, 0.156863, 0.368627, 1)

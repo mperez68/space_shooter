@@ -1,7 +1,7 @@
 extends Panel
 class_name Menu
 
-const MENU = preload("res://menu_controller.gd").MENU
+const MENU = preload("res://menu/menu_controller.gd").MENU
 signal transition(new_menu: MENU)
 
 func fade(is_fading_in = true):

@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://cn2758e84mwp8"]
 
 [ext_resource type="StyleBox" uid="uid://0hl7jtsiki8e" path="res://assets/default_theme.tres" id="1_i63ky"]
-[ext_resource type="Script" path="res://abstract_menu.gd" id="1_iu0hm"]
+[ext_resource type="Script" path="res://menu/abstract_menu.gd" id="1_iu0hm"]
 
 [sub_resource type="Animation" id="Animation_vprit"]
 length = 0.001

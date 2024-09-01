@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://d18i0qf4o05eh"]
 
-[ext_resource type="PackedScene" uid="uid://c5e0705bd4bop" path="res://level.tscn" id="1_ue2qo"]
-[ext_resource type="PackedScene" uid="uid://drxsumn5rwvgy" path="res://player.tscn" id="2_jmvph"]
+[ext_resource type="PackedScene" uid="uid://c5e0705bd4bop" path="res://levels/level.tscn" id="1_ue2qo"]
+[ext_resource type="PackedScene" uid="uid://drxsumn5rwvgy" path="res://units/player.tscn" id="2_jmvph"]
 [ext_resource type="PackedScene" uid="uid://wregww8dg177" path="res://levels/debugmap2.tscn" id="2_q880v"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nsa6q"]

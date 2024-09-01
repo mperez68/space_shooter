@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://c7ggotjy0fhpa"]
 
 [ext_resource type="Texture2D" uid="uid://v5blpqkgq1sm" path="res://assets/2d/temp-bg.jpg" id="1_gnykp"]
-[ext_resource type="PackedScene" uid="uid://cbemwcvyuq6pw" path="res://menu_controller.tscn" id="1_oai4l"]
+[ext_resource type="PackedScene" uid="uid://cbemwcvyuq6pw" path="res://menu/menu_controller.tscn" id="1_oai4l"]
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
