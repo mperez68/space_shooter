@@ -41,7 +41,7 @@ func _unhandled_input(event: InputEvent) -> void:
 
 # HUD/general tracking
 func _process(delta: float) -> void:
-	$HUD/BoostBar.value = $HUD/BoostBar.max_value -($HUD/BoostBar.max_value * ($BoostTimer.time_left / $BoostTimer.wait_time))
+	$HUD.getBoostBar().value = $HUD.getBoostBar().max_value -($HUD.getBoostBar().max_value * ($BoostTimer.time_left / $BoostTimer.wait_time))
 
 # Controls/physics
 func _physics_process(delta: float) -> void:

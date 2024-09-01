@@ -12,6 +12,7 @@ process_mode = 3
 script = ExtResource("1_0v8c5")
 
 [node name="MenuController" parent="." instance=ExtResource("1_3yguw")]
+top_level = true
 core_menu = 2
 fast_transition = true
 start_open = false

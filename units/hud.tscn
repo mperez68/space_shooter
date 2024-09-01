@@ -1,11 +1,355 @@
-[gd_scene format=3 uid="uid://djh2i44nypisc"]
+[gd_scene load_steps=12 format=3 uid="uid://djh2i44nypisc"]
+
+[ext_resource type="Texture2D" uid="uid://38wnuf81l80d" path="res://assets/2d/HUD10bar.png" id="1_03jx4"]
+[ext_resource type="StyleBox" uid="uid://bhaj382unu08j" path="res://assets/hud_neg_theme.tres" id="1_06w16"]
+[ext_resource type="Script" path="res://units/hud.gd" id="1_o4vyc"]
+[ext_resource type="Texture2D" uid="uid://c2v631ganqfgh" path="res://assets/2d/HUDborder.png" id="2_7dax8"]
+[ext_resource type="StyleBox" uid="uid://cnhk33sowmrc1" path="res://assets/hud_pos_theme.tres" id="2_v1c65"]
+[ext_resource type="Texture2D" uid="uid://b83v0ib0s1qcm" path="res://assets/2d/HUD3bar.png" id="3_3xotp"]
+[ext_resource type="StyleBox" uid="uid://dwarornr1mls7" path="res://assets/hud_neg2_theme.tres" id="4_pc3b3"]
+[ext_resource type="StyleBox" uid="uid://csr8d1hr2vqdt" path="res://assets/hud_pos2_theme.tres" id="5_p4ukc"]
+
+[sub_resource type="SystemFont" id="SystemFont_ympsg"]
+font_names = PackedStringArray("Courier New")
+
+[sub_resource type="SystemFont" id="SystemFont_kcd8o"]
+font_names = PackedStringArray("Courier New")
+
+[sub_resource type="SystemFont" id="SystemFont_7tby1"]
+font_names = PackedStringArray("Courier New")
 
 [node name="HUD" type="CanvasLayer"]
+script = ExtResource("1_o4vyc")
 
-[node name="BoostBar" type="ProgressBar" parent="."]
-offset_left = 25.0
-offset_top = 25.0
-offset_right = 325.0
-offset_bottom = 75.0
-value = 60.0
+[node name="Fx" type="TextureRect" parent="."]
+self_modulate = Color(1, 1, 1, 0.356863)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("2_7dax8")
+expand_mode = 3
+
+[node name="BoostBar" type="ProgressBar" parent="Fx"]
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.022
+anchor_top = 0.039
+anchor_right = 0.239
+anchor_bottom = 0.085
+offset_left = -0.344002
+offset_top = -0.272001
+offset_right = -0.328003
+offset_bottom = -0.0800018
+theme_override_styles/background = ExtResource("1_06w16")
+theme_override_styles/fill = ExtResource("5_p4ukc")
+max_value = 3.0
+step = 1.0
+value = 2.0
 show_percentage = false
+
+[node name="Border" type="TextureRect" parent="Fx/BoostBar"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_3xotp")
+expand_mode = 5
+
+[node name="HP" type="ProgressBar" parent="Fx"]
+show_behind_parent = true
+custom_minimum_size = Vector2(500, 30)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.283
+anchor_top = 0.915
+anchor_right = 0.717
+anchor_bottom = 0.961
+offset_left = -0.0160217
+offset_top = 0.0799561
+offset_right = 0.0159912
+offset_bottom = 0.271973
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_styles/background = ExtResource("1_06w16")
+theme_override_styles/fill = ExtResource("2_v1c65")
+step = 10.0
+value = 70.0
+show_percentage = false
+
+[node name="Border" type="TextureRect" parent="Fx/HP"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_03jx4")
+expand_mode = 5
+
+[node name="Shield" type="ProgressBar" parent="Fx"]
+show_behind_parent = true
+custom_minimum_size = Vector2(400, 30)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.326
+anchor_top = 0.884
+anchor_right = 0.674
+anchor_bottom = 0.931
+offset_left = 0.447998
+offset_top = -14.832
+offset_right = -0.447998
+offset_bottom = -15.288
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_styles/background = ExtResource("4_pc3b3")
+theme_override_styles/fill = ExtResource("5_p4ukc")
+step = 10.0
+value = 70.0
+show_percentage = false
+
+[node name="Border" type="TextureRect" parent="Fx/Shield"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_03jx4")
+expand_mode = 2
+
+[node name="Weapon" type="ColorRect" parent="Fx"]
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.883
+anchor_top = 0.792
+anchor_right = 0.97
+anchor_bottom = 0.946
+offset_left = -0.216003
+offset_top = -0.216064
+offset_right = -0.440063
+offset_bottom = -0.00799561
+grow_horizontal = 0
+grow_vertical = 0
+color = Color(0, 0, 0, 0.117647)
+
+[node name="WeaponIcon" type="TextureRect" parent="Fx/Weapon"]
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Secondary" type="ColorRect" parent="Fx"]
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 35.0
+offset_top = -135.208
+offset_right = 135.0
+offset_bottom = -35.208
+grow_vertical = 0
+color = Color(0, 0, 0, 0.117647)
+
+[node name="SecondaryIcon" type="TextureRect" parent="Fx/Secondary"]
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Ammo" type="ColorRect" parent="Fx"]
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.805
+anchor_top = 0.853
+anchor_right = 0.874
+anchor_bottom = 0.931
+offset_left = -0.360107
+offset_top = 0.255981
+offset_right = 0.151978
+offset_bottom = -0.288025
+grow_horizontal = 0
+grow_vertical = 0
+color = Color(0, 0, 0, 0.117647)
+
+[node name="Rounds" type="RichTextLabel" parent="Fx/Ammo"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 5.0
+offset_top = 5.0
+offset_right = -5.0
+offset_bottom = 28.0
+grow_horizontal = 2
+theme_override_fonts/normal_font = SubResource("SystemFont_ympsg")
+theme_override_font_sizes/normal_font_size = 24
+bbcode_enabled = true
+text = "[left]60[/left]"
+fit_content = true
+
+[node name="Slash" type="RichTextLabel" parent="Fx/Ammo"]
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -11.5
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/normal_font = SubResource("SystemFont_ympsg")
+theme_override_font_sizes/normal_font_size = 24
+bbcode_enabled = true
+text = "[center]/[/center]"
+fit_content = true
+
+[node name="Mags" type="RichTextLabel" parent="Fx/Ammo"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 5.0
+offset_top = -28.0
+offset_right = -5.0
+offset_bottom = -5.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_fonts/normal_font = SubResource("SystemFont_ympsg")
+theme_override_font_sizes/normal_font_size = 24
+bbcode_enabled = true
+text = "[right]12[/right]"
+fit_content = true
+
+[node name="SecondaryAmmo" type="ColorRect" parent="Fx"]
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.126
+anchor_top = 0.853
+anchor_right = 0.195
+anchor_bottom = 0.931
+offset_left = -0.152008
+offset_top = 0.255981
+offset_right = 0.359985
+offset_bottom = -0.288025
+grow_vertical = 0
+color = Color(0, 0, 0, 0.117647)
+
+[node name="Rounds" type="RichTextLabel" parent="Fx/SecondaryAmmo"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 5.0
+offset_top = 5.0
+offset_right = -5.0
+offset_bottom = 28.0
+grow_horizontal = 2
+theme_override_fonts/normal_font = SubResource("SystemFont_kcd8o")
+theme_override_font_sizes/normal_font_size = 24
+bbcode_enabled = true
+text = "[left]4[/left]"
+fit_content = true
+
+[node name="Slash" type="RichTextLabel" parent="Fx/SecondaryAmmo"]
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -11.5
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/normal_font = SubResource("SystemFont_kcd8o")
+theme_override_font_sizes/normal_font_size = 24
+bbcode_enabled = true
+text = "[center]/[/center]"
+fit_content = true
+
+[node name="Mags" type="RichTextLabel" parent="Fx/SecondaryAmmo"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 5.0
+offset_top = -28.0
+offset_right = -5.0
+offset_bottom = -5.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_fonts/normal_font = SubResource("SystemFont_kcd8o")
+theme_override_font_sizes/normal_font_size = 24
+bbcode_enabled = true
+text = "[right]12[/right]"
+fit_content = true
+
+[node name="Minimap" type="ColorRect" parent="Fx"]
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.87
+anchor_top = 0.039
+anchor_right = 0.978
+anchor_bottom = 0.231
+offset_left = -0.240051
+offset_top = -0.272001
+offset_right = 0.343994
+offset_bottom = 0.311996
+grow_horizontal = 0
+color = Color(0, 0, 0, 0.117647)
+
+[node name="MinimapOverlay" type="TextureRect" parent="Fx/Minimap"]
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HostileCounter" type="ColorRect" parent="Fx"]
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.37
+anchor_top = 0.039
+anchor_right = 0.63
+anchor_bottom = 0.085
+offset_left = -0.531982
+offset_top = -0.272001
+offset_right = -0.052063
+offset_bottom = -0.0800018
+grow_horizontal = 2
+color = Color(0, 0, 0, 0.117647)
+
+[node name="HostileCounterText" type="RichTextLabel" parent="Fx/HostileCounter"]
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -11.5
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/normal_font = SubResource("SystemFont_7tby1")
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+text = "[center]ALL CLEAR[/center]"
+fit_content = true
