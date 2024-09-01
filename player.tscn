@@ -1,8 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://drxsumn5rwvgy"]
+[gd_scene load_steps=6 format=3 uid="uid://drxsumn5rwvgy"]
 
 [ext_resource type="Script" path="res://player.gd" id="1_qan14"]
 [ext_resource type="PackedScene" uid="uid://c61y28s47jel1" path="res://managers/sfx_manager.tscn" id="2_2a2hr"]
-[ext_resource type="PackedScene" uid="uid://baje1p4qrcvhx" path="res://in_game_menu.tscn" id="4_7h8tt"]
 [ext_resource type="PackedScene" uid="uid://djh2i44nypisc" path="res://hud.tscn" id="9_lyc7p"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_xgj1r"]
@@ -32,8 +31,5 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.48267, 0)
 [node name="Camera3D" type="Camera3D" parent="Head"]
 
 [node name="HUD" parent="." instance=ExtResource("9_lyc7p")]
-
-[node name="InGameMenu" parent="." instance=ExtResource("4_7h8tt")]
-visible = false
 
 [connection signal="timeout" from="BoostTimer" to="." method="_on_boost_timer_timeout"]

@@ -1,19 +1,32 @@
-[gd_scene load_steps=3 format=3 uid="uid://c5e0705bd4bop"]
+[gd_scene load_steps=5 format=3 uid="uid://c5e0705bd4bop"]
 
+[ext_resource type="Script" path="res://level.gd" id="1_0v8c5"]
+[ext_resource type="PackedScene" uid="uid://cbemwcvyuq6pw" path="res://menu_controller.tscn" id="1_3yguw"]
 [ext_resource type="PackedScene" uid="uid://b5jqk57hvukn4" path="res://managers/music_manager.tscn" id="1_8elko"]
 
 [sub_resource type="Environment" id="Environment_buyw3"]
 ambient_light_source = 3
 
 [node name="Level" type="Node3D"]
+process_mode = 3
+script = ExtResource("1_0v8c5")
+
+[node name="MenuController" parent="." instance=ExtResource("1_3yguw")]
+core_menu = 2
+fast_transition = true
+start_open = false
 
 [node name="MusicManager" parent="." instance=ExtResource("1_8elko")]
 
 [node name="Skybox" type="WorldEnvironment" parent="."]
+process_mode = 1
 environment = SubResource("Environment_buyw3")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+process_mode = 1
 transform = Transform3D(0.866025, -0.25, -0.433013, 0, -0.866025, 0.5, -0.5, -0.433013, -0.75, -8, 8.8737, -9)
 light_energy = 3.0
 light_indirect_energy = 10.0
 shadow_enabled = true
+
+[connection signal="close" from="MenuController" to="." method="pause_menu" binds= [false]]

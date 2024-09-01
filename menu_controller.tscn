@@ -1,0 +1,733 @@
+[gd_scene load_steps=11 format=3 uid="uid://cbemwcvyuq6pw"]
+
+[ext_resource type="Script" path="res://menu_controller.gd" id="1_8nrub"]
+[ext_resource type="PackedScene" uid="uid://cn2758e84mwp8" path="res://abstract_menu.tscn" id="3_rcvll"]
+[ext_resource type="Script" path="res://main_menu.gd" id="4_sdk8b"]
+[ext_resource type="PackedScene" uid="uid://cj1qqror4vphj" path="res://managers/SettingsManager.tscn" id="4_tj4f8"]
+[ext_resource type="Script" path="res://char_select_menu.gd" id="5_bp2q6"]
+[ext_resource type="Script" path="res://mission_select_menu.gd" id="6_wkak2"]
+[ext_resource type="Script" path="res://settings_menu.gd" id="7_omgki"]
+[ext_resource type="Script" path="res://in_game_menu.gd" id="8_egr1j"]
+
+[sub_resource type="Gradient" id="Gradient_u20ar"]
+colors = PackedColorArray(0, 0, 0.137255, 1, 0.109804, 0.156863, 0.368627, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_3pbqd"]
+gradient = SubResource("Gradient_u20ar")
+
+[node name="MenuController" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_8nrub")
+
+[node name="FadeTimer" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
+
+[node name="Main" parent="." instance=ExtResource("3_rcvll")]
+visible = false
+layout_mode = 1
+anchor_top = 0.039
+anchor_right = 0.673
+anchor_bottom = 0.965
+offset_top = -0.272001
+offset_right = -0.296021
+offset_bottom = -0.320007
+grow_horizontal = 1
+grow_vertical = 1
+script = ExtResource("4_sdk8b")
+
+[node name="TitleBox" type="TextureRect" parent="Main"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.062
+anchor_top = 0.042
+anchor_right = 0.937
+anchor_bottom = 0.292
+offset_left = 0.199999
+offset_top = -0.200003
+offset_right = 0.199982
+offset_bottom = -0.200012
+grow_horizontal = 2
+texture = SubResource("GradientTexture1D_3pbqd")
+
+[node name="Title" type="RichTextLabel" parent="Main/TitleBox"]
+custom_minimum_size = Vector2(0, 25)
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.417
+anchor_right = 1.0
+anchor_bottom = 0.583
+offset_top = 12.45
+offset_bottom = -12.45
+grow_horizontal = 2
+grow_vertical = 2
+bbcode_enabled = true
+text = "[center][b]UNTITLED SPACE SHOOTER[/b][/center]"
+
+[node name="Play" type="Button" parent="Main"]
+custom_minimum_size = Vector2(200, 50)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.062
+anchor_top = 0.333
+anchor_right = 0.937
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "PLAY
+"
+
+[node name="Settings" type="Button" parent="Main"]
+custom_minimum_size = Vector2(200, 100)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.062
+anchor_top = 0.542
+anchor_right = 0.937
+anchor_bottom = 0.708
+grow_horizontal = 2
+grow_vertical = 2
+text = "SETTINGS"
+
+[node name="Exit" type="Button" parent="Main"]
+custom_minimum_size = Vector2(200, 50)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.062
+anchor_top = 0.75
+anchor_right = 0.937
+anchor_bottom = 0.917
+grow_horizontal = 2
+grow_vertical = 2
+text = "EXIT"
+
+[node name="CharSelect" parent="." instance=ExtResource("3_rcvll")]
+visible = false
+layout_mode = 1
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.26
+anchor_bottom = 0.772
+offset_left = 75.0
+offset_top = 25.0
+offset_right = 775.48
+offset_bottom = 124.744
+grow_horizontal = 1
+grow_vertical = 1
+script = ExtResource("5_bp2q6")
+
+[node name="TitleBox" type="TextureRect" parent="CharSelect"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.062
+anchor_top = 0.042
+anchor_right = 0.937
+anchor_bottom = 0.125
+offset_left = 0.200001
+offset_top = -0.200003
+offset_right = 0.199951
+grow_horizontal = 2
+texture = SubResource("GradientTexture1D_3pbqd")
+
+[node name="Title" type="RichTextLabel" parent="CharSelect/TitleBox"]
+custom_minimum_size = Vector2(0, 25)
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.417
+anchor_right = 1.0
+anchor_bottom = 0.583
+offset_top = 12.45
+offset_bottom = -12.45
+grow_horizontal = 2
+grow_vertical = 2
+bbcode_enabled = true
+text = "[center]CHARACTER SELECT[/center]"
+
+[node name="CharSel1" type="Button" parent="CharSelect"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.05
+anchor_top = 0.208
+anchor_right = 0.15
+anchor_bottom = 0.375
+offset_top = 0.199997
+offset_bottom = 0.199982
+grow_horizontal = 2
+grow_vertical = 2
+text = "BRIGAND"
+
+[node name="CharSel2" type="Button" parent="CharSelect"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.05
+anchor_top = 0.375
+anchor_right = 0.15
+anchor_bottom = 0.542
+offset_top = -1.52588e-05
+offset_bottom = -3.05176e-05
+grow_horizontal = 2
+grow_vertical = 2
+text = "GEIST"
+
+[node name="CharSel3" type="Button" parent="CharSelect"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.05
+anchor_top = 0.542
+anchor_right = 0.15
+anchor_bottom = 0.709
+offset_top = -0.200043
+offset_bottom = -0.200012
+grow_horizontal = 2
+grow_vertical = 2
+text = "CANNIBAL"
+
+[node name="Description" type="ColorRect" parent="CharSelect"]
+custom_minimum_size = Vector2(200, 100)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.175
+anchor_top = 0.75
+anchor_right = 0.825
+anchor_bottom = 0.917
+offset_left = -1.52588e-05
+offset_top = -3.05176e-05
+offset_right = -6.10352e-05
+offset_bottom = -0.200012
+grow_horizontal = 2
+grow_vertical = 0
+color = Color(0, 0, 0, 0.137255)
+
+[node name="Text" type="RichTextLabel" parent="CharSelect/Description"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.015
+anchor_top = 0.1
+anchor_right = 0.985
+anchor_bottom = 1.0
+offset_left = 0.25
+offset_right = -0.250061
+offset_bottom = -10.0
+grow_horizontal = 2
+grow_vertical = 2
+bbcode_enabled = true
+text = "SELECT CHARACTER"
+
+[node name="Preview" type="ColorRect" parent="CharSelect"]
+custom_minimum_size = Vector2(200, 100)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.175
+anchor_top = 0.167
+anchor_right = 0.825
+anchor_bottom = 0.708
+offset_left = -1.52588e-05
+offset_top = -0.200005
+offset_right = -6.10352e-05
+offset_bottom = 25.2
+grow_horizontal = 2
+grow_vertical = 0
+color = Color(0, 0, 0, 0.137255)
+
+[node name="Text" type="RichTextLabel" parent="CharSelect/Preview"]
+custom_minimum_size = Vector2(0, 25)
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.462
+anchor_right = 1.0
+anchor_bottom = 0.538
+offset_top = 12.35
+offset_bottom = -12.35
+grow_horizontal = 2
+grow_vertical = 2
+bbcode_enabled = true
+text = "[center]PREVIEW[/center]"
+
+[node name="Stats" type="ColorRect" parent="CharSelect"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.85
+anchor_top = 0.208
+anchor_right = 0.95
+anchor_bottom = 0.708
+offset_top = 0.199997
+offset_right = -6.10352e-05
+offset_bottom = 0.200012
+grow_horizontal = 0
+grow_vertical = 2
+color = Color(0, 0, 0, 0.137255)
+
+[node name="Text" type="RichTextLabel" parent="CharSelect/Stats"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_top = 10.0
+offset_right = -10.0
+offset_bottom = -10.0
+grow_horizontal = 2
+grow_vertical = 2
+bbcode_enabled = true
+text = "STATS"
+
+[node name="Back" type="Button" parent="CharSelect"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.05
+anchor_top = 0.75
+anchor_right = 0.15
+anchor_bottom = 0.917
+offset_top = -3.05176e-05
+offset_bottom = -6.10352e-05
+grow_horizontal = 2
+grow_vertical = 2
+text = "BACK"
+
+[node name="Next" type="Button" parent="CharSelect"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.85
+anchor_top = 0.75
+anchor_right = 0.95
+anchor_bottom = 0.917
+offset_top = -3.05176e-05
+offset_right = -6.10352e-05
+offset_bottom = -0.200012
+grow_horizontal = 0
+grow_vertical = 0
+text = "NEXT"
+
+[node name="MissionSelect" parent="." instance=ExtResource("3_rcvll")]
+visible = false
+layout_mode = 1
+anchor_left = 0.065
+anchor_top = 0.039
+anchor_right = 0.933
+anchor_bottom = 0.965
+offset_left = 0.119995
+offset_top = -0.272001
+offset_right = 0.18396
+offset_bottom = -0.320007
+script = ExtResource("6_wkak2")
+
+[node name="TitleBox" type="TextureRect" parent="MissionSelect"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.062
+anchor_top = 0.042
+anchor_right = 0.937
+anchor_bottom = 0.125
+offset_left = -2.0
+offset_top = -0.199999
+offset_right = -2.0
+grow_horizontal = 2
+texture = SubResource("GradientTexture1D_3pbqd")
+
+[node name="Title" type="RichTextLabel" parent="MissionSelect/TitleBox"]
+custom_minimum_size = Vector2(0, 25)
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.417
+anchor_right = 1.0
+anchor_bottom = 0.583
+offset_top = 12.45
+offset_bottom = -12.45
+grow_horizontal = 2
+grow_vertical = 2
+bbcode_enabled = true
+text = "[center]MISSION SELECT[/center]"
+
+[node name="Mission1" type="Button" parent="MissionSelect"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.05
+anchor_top = 0.167
+anchor_right = 0.475
+anchor_bottom = 0.417
+offset_top = -0.199997
+offset_right = -3.05176e-05
+offset_bottom = -0.199997
+grow_vertical = 2
+text = "GROUND1"
+
+[node name="Mission2" type="Button" parent="MissionSelect"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.05
+anchor_top = 0.458
+anchor_right = 0.475
+anchor_bottom = 0.708
+offset_top = 0.200012
+offset_right = -3.05176e-05
+offset_bottom = 0.200043
+grow_vertical = 2
+text = "GROUND2"
+
+[node name="Mission3" type="Button" parent="MissionSelect"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.525
+anchor_top = 0.167
+anchor_right = 0.95
+anchor_bottom = 0.417
+offset_left = 16.0
+offset_top = -0.199997
+offset_right = 15.9999
+offset_bottom = -0.199997
+grow_vertical = 2
+text = "SPACE1"
+
+[node name="Mission4" type="Button" parent="MissionSelect"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.525
+anchor_top = 0.458
+anchor_right = 0.95
+anchor_bottom = 0.708
+offset_left = 16.0
+offset_top = 0.199982
+offset_right = 15.9999
+offset_bottom = 0.200012
+grow_vertical = 2
+text = "SPACE2"
+
+[node name="Description" type="ColorRect" parent="MissionSelect"]
+custom_minimum_size = Vector2(200, 100)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.175
+anchor_top = 0.75
+anchor_right = 0.825
+anchor_bottom = 0.917
+offset_right = -6.10352e-05
+offset_bottom = -0.200012
+grow_horizontal = 2
+grow_vertical = 0
+color = Color(0, 0, 0, 0.137255)
+
+[node name="Text" type="RichTextLabel" parent="MissionSelect/Description"]
+custom_minimum_size = Vector2(0, 25)
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.375
+anchor_right = 1.0
+anchor_bottom = 0.625
+offset_top = 12.5
+offset_bottom = -12.5
+grow_horizontal = 2
+grow_vertical = 2
+bbcode_enabled = true
+text = "[center]SELECT MISSION[/center]"
+
+[node name="Back" type="Button" parent="MissionSelect"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.05
+anchor_top = 0.75
+anchor_right = 0.15
+anchor_bottom = 0.917
+grow_horizontal = 2
+grow_vertical = 2
+text = "BACK"
+
+[node name="Start" type="Button" parent="MissionSelect"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.85
+anchor_top = 0.75
+anchor_right = 0.95
+anchor_bottom = 0.917
+offset_top = -3.05176e-05
+offset_right = -6.10352e-05
+offset_bottom = -0.200012
+grow_horizontal = 0
+grow_vertical = 0
+text = "START"
+
+[node name="Settings" parent="." instance=ExtResource("3_rcvll")]
+visible = false
+layout_mode = 1
+script = ExtResource("7_omgki")
+
+[node name="TitleBox" type="TextureRect" parent="Settings"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.062
+anchor_top = 0.042
+anchor_right = 0.937
+anchor_bottom = 0.292
+offset_left = 25.2
+offset_top = 24.8
+offset_right = -24.8
+offset_bottom = -25.2
+grow_horizontal = 2
+texture = SubResource("GradientTexture1D_3pbqd")
+
+[node name="Title" type="RichTextLabel" parent="Settings/TitleBox"]
+custom_minimum_size = Vector2(0, 25)
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.417
+anchor_right = 1.0
+anchor_bottom = 0.583
+offset_top = 12.45
+offset_bottom = -12.45
+grow_horizontal = 2
+grow_vertical = 2
+bbcode_enabled = true
+text = "[center]SETTINGS[/center]"
+
+[node name="Fullscreen" type="Button" parent="Settings"]
+custom_minimum_size = Vector2(100, 50)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.062
+anchor_top = 0.333
+anchor_right = 0.937
+anchor_bottom = 0.5
+offset_left = 0.199999
+offset_top = 0.199997
+offset_right = -199.8
+grow_horizontal = 2
+grow_vertical = 2
+text = "FULLSCREEN"
+
+[node name="Windowed" type="Button" parent="Settings"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.062
+anchor_top = 0.333
+anchor_right = 0.937
+anchor_bottom = 0.5
+offset_left = 200.2
+offset_top = 0.199997
+offset_right = 0.199982
+grow_horizontal = 2
+grow_vertical = 2
+text = "WINDOWED"
+
+[node name="AudioSliders" type="ColorRect" parent="Settings"]
+custom_minimum_size = Vector2(200, 100)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.25
+anchor_top = 0.542
+anchor_right = 0.937
+anchor_bottom = 0.708
+offset_top = -0.200043
+offset_right = 0.199982
+offset_bottom = 0.200012
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.137255)
+
+[node name="MasterAudio" type="HSlider" parent="Settings/AudioSliders"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 16.0
+grow_horizontal = 2
+value = 100.0
+rounded = true
+
+[node name="MusicAudio" type="HSlider" parent="Settings/AudioSliders"]
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -8.0
+offset_bottom = 8.0
+grow_horizontal = 2
+grow_vertical = 2
+value = 100.0
+
+[node name="SFXAudio" type="HSlider" parent="Settings/AudioSliders"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -16.0
+grow_horizontal = 2
+grow_vertical = 0
+value = 100.0
+
+[node name="AudioLabels" type="ColorRect" parent="Settings"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.062
+anchor_top = 0.542
+anchor_right = 0.225
+anchor_bottom = 0.708
+offset_left = 0.199999
+offset_top = -0.200043
+offset_bottom = 0.200012
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.137255)
+
+[node name="MasterLabel" type="Label" parent="Settings/AudioLabels"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 0.23
+grow_horizontal = 2
+text = "MASTER"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MusicAudio" type="Label" parent="Settings/AudioLabels"]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.385
+anchor_right = 1.0
+anchor_bottom = 0.615
+grow_horizontal = 2
+grow_vertical = 2
+text = "MUSIC"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SFXAudio" type="Label" parent="Settings/AudioLabels"]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.77
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "SFX"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Back" type="Button" parent="Settings"]
+custom_minimum_size = Vector2(200, 50)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.062
+anchor_top = 0.75
+anchor_right = 0.937
+anchor_bottom = 0.917
+grow_horizontal = 2
+grow_vertical = 2
+text = "BACK"
+
+[node name="SettingsManager" parent="Settings" instance=ExtResource("4_tj4f8")]
+
+[node name="InGame" parent="." instance=ExtResource("3_rcvll")]
+visible = false
+layout_mode = 1
+anchor_left = 0.37
+anchor_top = 0.114
+anchor_right = 0.63
+anchor_bottom = 0.886
+offset_left = -0.23999
+offset_top = 0.127998
+offset_right = 0.239929
+offset_bottom = -0.128052
+grow_horizontal = 1
+grow_vertical = 1
+script = ExtResource("8_egr1j")
+
+[node name="TitleBox" type="TextureRect" parent="InGame"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.062
+anchor_top = 0.042
+anchor_right = 0.937
+anchor_bottom = 0.292
+offset_left = 25.2
+offset_top = 24.8
+offset_right = -24.8
+offset_bottom = -25.2
+grow_horizontal = 2
+texture = SubResource("GradientTexture1D_3pbqd")
+
+[node name="Title" type="RichTextLabel" parent="InGame/TitleBox"]
+custom_minimum_size = Vector2(0, 25)
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.417
+anchor_right = 1.0
+anchor_bottom = 0.583
+offset_top = 12.45
+offset_bottom = -12.45
+grow_horizontal = 2
+grow_vertical = 2
+bbcode_enabled = true
+text = "[center]GAME PAUSED[/center]"
+
+[node name="Resume" type="Button" parent="InGame"]
+custom_minimum_size = Vector2(200, 50)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.062
+anchor_top = 0.333
+anchor_right = 0.937
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "RESUME"
+
+[node name="Settings" type="Button" parent="InGame"]
+custom_minimum_size = Vector2(200, 100)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.062
+anchor_top = 0.542
+anchor_right = 0.937
+anchor_bottom = 0.708
+grow_horizontal = 2
+grow_vertical = 2
+text = "SETTINGS"
+
+[node name="Exit" type="Button" parent="InGame"]
+custom_minimum_size = Vector2(200, 50)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.062
+anchor_top = 0.75
+anchor_right = 0.937
+anchor_bottom = 0.917
+grow_horizontal = 2
+grow_vertical = 2
+text = "EXIT TO MENU"
+
+[connection signal="timeout" from="FadeTimer" to="." method="_on_fade_timer_timeout"]
+[connection signal="transition" from="Main" to="." method="change_menu"]
+[connection signal="pressed" from="Main/Play" to="Main" method="_on_play_pressed"]
+[connection signal="pressed" from="Main/Settings" to="Main" method="_on_settings_pressed"]
+[connection signal="pressed" from="Main/Exit" to="Main" method="_on_exit_pressed"]
+[connection signal="transition" from="CharSelect" to="." method="change_menu"]
+[connection signal="pressed" from="CharSelect/Back" to="CharSelect" method="_on_back_pressed"]
+[connection signal="pressed" from="CharSelect/Next" to="CharSelect" method="_on_next_pressed"]
+[connection signal="transition" from="MissionSelect" to="." method="change_menu"]
+[connection signal="pressed" from="MissionSelect/Back" to="MissionSelect" method="_on_back_pressed"]
+[connection signal="pressed" from="MissionSelect/Start" to="MissionSelect" method="_on_start_pressed"]
+[connection signal="transition" from="Settings" to="." method="change_menu"]
+[connection signal="pressed" from="Settings/Back" to="Settings" method="_on_back_pressed"]
+[connection signal="close_menu" from="InGame" to="." method="close_menu"]
+[connection signal="transition" from="InGame" to="." method="change_menu"]
+[connection signal="pressed" from="InGame/Resume" to="InGame" method="_on_resume_pressed"]
+[connection signal="pressed" from="InGame/Settings" to="InGame" method="_on_settings_pressed"]
+[connection signal="pressed" from="InGame/Exit" to="InGame" method="_on_exit_pressed"]
