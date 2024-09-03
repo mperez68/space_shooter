@@ -1,6 +1,8 @@
 extends Node3D
+class_name Level
 
 @export var next_level: PackedScene = null
+@export var gravity = 9.8
 
 @onready var menu = $MenuController
 
@@ -22,7 +24,7 @@ func _unhandled_input(event: InputEvent) -> void:
 func end_level(success: bool):
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	# TODO SPC-25: display debrief, make buttons for next level or return to menu
-	print(next_level)
+	print(success, ", ", next_level)
 	if next_level == null:
 		get_tree().change_scene_to_file("res://menu/main_menu.tscn")
 	else:

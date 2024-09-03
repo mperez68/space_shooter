@@ -1,10 +1,8 @@
-extends BaseMecha
+extends AbstractMecha
 
 const BOOST_VELOCITY = 18.0
 const MAX_BOOSTS = 2
 
-var speed = WALK_SPEED
-var state = STATE.GROUND
 var boosts = 0
 var restart_walk = false
 
@@ -30,16 +28,12 @@ func _unhandled_input(event: InputEvent) -> void:
 		camera.rotation.x = clamp(camera.rotation.x, deg_to_rad(-90), deg_to_rad(90))
 
 # HUD/general tracking
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	$HUD.getBoostBar().value = $HUD.getBoostBar().max_value -($HUD.getBoostBar().max_value * ($BoostTimer.time_left / $BoostTimer.wait_time))
 
 # Controls/physics
 func _physics_process(delta: float) -> void:
-	# Add the gravity.
-	if not is_on_floor():
-		velocity.y -= gravity * delta
-		if velocity.y < 0:
-			change_state(STATE.FALLING)
+	super(delta)
 	
 	# Handle Sprint.
 	if Input.is_action_pressed("sprint"):
@@ -52,10 +46,9 @@ func _physics_process(delta: float) -> void:
 	var input_dir := Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
 	var direction = (head.transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 	
-	animate(input_dir);
+	animate(input_dir)
 	
 	if is_on_floor():
-		change_state(STATE.GROUND)
 		if direction:
 			velocity.x = direction.x * speed
 			velocity.z = direction.z * speed
@@ -111,25 +104,18 @@ func jump(boost: bool = false):
 	velocity.y = JUMP_VELOCITY
 	change_state(STATE.RISING)
 
-func change_state(new_state: STATE):
-	if state == new_state:
-		# no change
-		return
+func _change_state(new_state: STATE):
+	super(new_state)
 	
 	# do stuff on state change
 	if state == STATE.GROUND and new_state == STATE.RISING:
-		sfx.play(sfx.AUDIO.JUMP)
 		if !$BoostTimer.is_stopped():
 			$BoostTimer.stop()
 	
 	if state == STATE.FALLING and new_state == STATE.GROUND:
-		sfx.play(sfx.AUDIO.LAND)
 		t_bob = 7*PI/8
 		if $BoostTimer.is_stopped() and boosts != MAX_BOOSTS:
 			$BoostTimer.start()
-	
-	# update
-	state = new_state
 
 func _headbob(time) -> Vector3:
 	var pos = Vector3.ZERO

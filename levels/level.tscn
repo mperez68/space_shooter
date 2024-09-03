@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://c5e0705bd4bop"]
+[gd_scene load_steps=7 format=3 uid="uid://c5e0705bd4bop"]
 
 [ext_resource type="Script" path="res://levels/level.gd" id="1_0v8c5"]
 [ext_resource type="PackedScene" uid="uid://cbemwcvyuq6pw" path="res://menu/menu_controller.tscn" id="1_3yguw"]
@@ -6,6 +6,13 @@
 
 [sub_resource type="Environment" id="Environment_buyw3"]
 ambient_light_source = 3
+
+[sub_resource type="NavigationMesh" id="NavigationMesh_0siok"]
+vertices = PackedVector3Array(-49.5, 0.548992, -49, -49.5, 0.548992, 50, 49.5, 0.548992, 50, 49.5, 0.548992, -49)
+polygons = [PackedInt32Array(3, 2, 0), PackedInt32Array(0, 2, 1)]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_42evl"]
+albedo_color = Color(0.182764, 0.482239, 0, 1)
 
 [node name="Level" type="Node3D"]
 process_mode = 3
@@ -29,5 +36,20 @@ transform = Transform3D(0.866025, -0.25, -0.433013, 0, -0.866025, 0.5, -0.5, -0.
 light_energy = 3.0
 light_indirect_energy = 10.0
 shadow_enabled = true
+
+[node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
+process_mode = 1
+navigation_mesh = SubResource("NavigationMesh_0siok")
+
+[node name="Floor" type="CSGBox3D" parent="NavigationRegion3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0494918, 0.5)
+use_collision = true
+collision_layer = 3
+collision_mask = 3
+size = Vector3(100, 0.001, 100)
+material = SubResource("StandardMaterial3D_42evl")
+
+[node name="units" type="Node3D" parent="."]
+process_mode = 1
 
 [connection signal="close" from="MenuController" to="." method="pause_menu" binds= [false]]

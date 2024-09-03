@@ -1,6 +1,6 @@
 extends Node
 
-enum AUDIO{ JUMP, BOOST, LAND, SHOOT, WALKING }
+enum AUDIO{ JUMP, BOOST, LAND, SHOOT, WALKING, RECHARGE }
 
 @onready var jump = $Jump
 @onready var land = $Land
@@ -21,6 +21,8 @@ func play(a: AUDIO, stop = false):
 			sel = $Shoot
 		AUDIO.WALKING:
 			sel = $Walk
+		AUDIO.RECHARGE:
+			return	# todo
 	if (stop):
 		sel.stop()
 	else:
