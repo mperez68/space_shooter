@@ -1,42 +1,32 @@
-extends CharacterBody3D
+extends BaseMecha
 
-enum STATE{ GROUND, RISING, FALLING }
-
-const WALK_SPEED = 5.0
-const SPRINT_SPEED = 8.0
-const JUMP_VELOCITY = 6.0
 const BOOST_VELOCITY = 18.0
-const AIRBORNE_MULTIPLIER = 3.0
-const INERTIA_MULTIPLIER = 8.0
-const BASE_FOV = 75.0
-const FOV_CHANGE = 1.5
 const MAX_BOOSTS = 2
 
 var speed = WALK_SPEED
 var state = STATE.GROUND
-var boosts = MAX_BOOSTS
+var boosts = 0
 var restart_walk = false
-
-@export var sensitivity = 0.005
-@export var gravity = 9.8
 
 const BOB_FREQ = 2.0
 const BOB_AMP = 0.08
 var t_bob = 0.0
-var last_bob_y = []
 
 @onready var head = $Head
 @onready var camera = $Head/Camera3D
-@onready var sfx = $SfxManager
 
 func _ready() -> void:
+	super()
+	
 	# lock mouse
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:
 		head.rotate_y(-event.relative.x * sensitivity)
+		body.rotate_y(-event.relative.x * sensitivity)
 		camera.rotate_x(-event.relative.y * sensitivity)
+		body_parts[1].rotate_x(-event.relative.y * sensitivity)
 		camera.rotation.x = clamp(camera.rotation.x, deg_to_rad(-90), deg_to_rad(90))
 
 # HUD/general tracking
@@ -62,6 +52,8 @@ func _physics_process(delta: float) -> void:
 	var input_dir := Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
 	var direction = (head.transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 	
+	animate(input_dir);
+	
 	if is_on_floor():
 		change_state(STATE.GROUND)
 		if direction:
@@ -80,14 +72,10 @@ func _physics_process(delta: float) -> void:
 	# Handle jump.
 	if Input.is_action_just_pressed("ui_accept"):
 		if is_on_floor():
-			sfx.play(sfx.AUDIO.JUMP)
-			velocity.y = JUMP_VELOCITY
-			change_state(STATE.RISING)
+			jump()
 		elif boosts > 0:
 			boosts -= 1
-			sfx.play(sfx.AUDIO.BOOST)
-			velocity.y = JUMP_VELOCITY
-			change_state(STATE.RISING)
+			jump(true)
 	
 	# Handle Strafe boost.
 	var strafe = Vector3(0, 0, 0)
@@ -116,6 +104,12 @@ func _physics_process(delta: float) -> void:
 		restart_walk = true
 
 	move_and_slide()
+
+func jump(boost: bool = false):
+	if boost:
+		sfx.play(sfx.AUDIO.BOOST)
+	velocity.y = JUMP_VELOCITY
+	change_state(STATE.RISING)
 
 func change_state(new_state: STATE):
 	if state == new_state:

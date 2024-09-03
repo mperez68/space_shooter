@@ -11,12 +11,15 @@
 
 [sub_resource type="SystemFont" id="SystemFont_ympsg"]
 font_names = PackedStringArray("Courier New")
+subpixel_positioning = 0
 
 [sub_resource type="SystemFont" id="SystemFont_kcd8o"]
 font_names = PackedStringArray("Courier New")
+subpixel_positioning = 0
 
 [sub_resource type="SystemFont" id="SystemFont_7tby1"]
 font_names = PackedStringArray("Courier New")
+subpixel_positioning = 0
 
 [node name="HUD" type="CanvasLayer"]
 script = ExtResource("1_o4vyc")

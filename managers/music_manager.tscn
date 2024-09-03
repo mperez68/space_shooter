@@ -1,17 +1,16 @@
 [gd_scene load_steps=4 format=3 uid="uid://b5jqk57hvukn4"]
 
+[ext_resource type="Script" path="res://managers/music_manager.gd" id="1_6nsbx"]
 [ext_resource type="AudioStream" uid="uid://5dwl4i3njfoi" path="res://assets/sound/028-2 intro.wav" id="1_suxjd"]
-[ext_resource type="Script" path="res://managers/intro.gd" id="2_b3h8p"]
 [ext_resource type="AudioStream" uid="uid://dglnbus0bqql8" path="res://assets/sound/028-2 loop.wav" id="3_ae2bh"]
 
 [node name="MusicManager" type="Node"]
+script = ExtResource("1_6nsbx")
 
 [node name="intro" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("1_suxjd")
-autoplay = true
-script = ExtResource("2_b3h8p")
 
 [node name="loop" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_ae2bh")
 
-[connection signal="finished" from="intro" to="intro" method="_on_finished"]
+[connection signal="finished" from="intro" to="." method="_on_intro_finished"]

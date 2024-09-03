@@ -24,4 +24,6 @@ func play(a: AUDIO, stop = false):
 	if (stop):
 		sel.stop()
 	else:
-		sel.play()
+		if !sel.playing or (sel.get_playback_position() > 0.1):	# prevent rapid re-trigger
+			sel.play()
+		
