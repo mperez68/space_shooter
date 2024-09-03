@@ -28,6 +28,7 @@ var state = STATE.GROUND
 @onready var delay = $RechargeDelay
 @onready var tick = $RechargeTick
 @onready var shield_anim = $Shield/AnimationPlayer
+@onready var skeleton = $Root/Skeleton3D
 
 func _ready() -> void:
 	# turn body invisible if needed
@@ -38,6 +39,9 @@ func _ready() -> void:
 	var parent = get_parent().get_parent()
 	if parent:
 		gravity = parent.gravity
+
+func _process(_delta: float) -> void:
+	pass
 
 func _physics_process(delta: float) -> void:
 	# Add the gravity.
@@ -117,5 +121,5 @@ func _on_recharge_tick_timeout() -> void:
 	if shield >= MAX_SHIELD:
 		tick.stop()
 
-func _on_shield_animation_finished(anim_name: StringName) -> void:
+func _on_shield_animation_finished(_anim_name: StringName) -> void:
 	shield_anim.play("idle")

@@ -15,6 +15,7 @@ func _ready() -> void:
 	super()
 	
 	player = get_node(player_path)
+	nav_agent.set_target_position(player.global_position)
 
 func _physics_process(delta: float) -> void:
 	super(delta)
@@ -40,7 +41,3 @@ func _physics_process(delta: float) -> void:
 	
 	
 	move_and_slide()
-
-func _unhandled_input(event: InputEvent) -> void:
-	if event.is_action_pressed("shoot"):
-		hit(1)

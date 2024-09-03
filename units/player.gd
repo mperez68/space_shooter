@@ -10,8 +10,14 @@ const BOB_FREQ = 2.0
 const BOB_AMP = 0.08
 var t_bob = 0.0
 
+var slug = load("res://units/guns/laser.tscn")
+var slug_instance
+
 @onready var head = $Head
 @onready var camera = $Head/Camera3D
+@onready var gun = $Head/Camera3D/Rifle/AnimationPlayer
+@onready var gun_barrel = $Head/Camera3D/Rifle/RayCast3D
+
 
 func _ready() -> void:
 	super()
@@ -26,6 +32,15 @@ func _unhandled_input(event: InputEvent) -> void:
 		camera.rotate_x(-event.relative.y * sensitivity)
 		body_parts[1].rotate_x(-event.relative.y * sensitivity)
 		camera.rotation.x = clamp(camera.rotation.x, deg_to_rad(-90), deg_to_rad(90))
+	
+	if event.is_action_pressed("shoot"):
+		if !gun.is_playing():
+			gun.play("shoot")
+			slug_instance = slug.instantiate()
+			slug_instance.position = gun_barrel.global_position
+			slug_instance.transform.basis = gun_barrel.global_transform.basis
+			get_parent().add_child(slug_instance)
+			
 
 # HUD/general tracking
 func _process(_delta: float) -> void:
