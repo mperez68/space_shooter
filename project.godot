@@ -103,5 +103,4 @@ swap_last={
 
 [layer_names]
 
-3d_physics/layer_1="Live"
-3d_physics/layer_2="Dead"
+3d_physics/layer_3="Dead"

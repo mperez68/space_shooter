@@ -3,6 +3,7 @@
 [ext_resource type="Script" path="res://levels/level.gd" id="1_0v8c5"]
 [ext_resource type="PackedScene" uid="uid://cbemwcvyuq6pw" path="res://menu/menu_controller.tscn" id="1_3yguw"]
 [ext_resource type="PackedScene" uid="uid://b5jqk57hvukn4" path="res://managers/music_manager.tscn" id="1_8elko"]
+[ext_resource type="MeshLibrary" uid="uid://daltr8fkhmbjt" path="res://tilemesh.tres" id="4_bhh2p"]
 
 [sub_resource type="Environment" id="Environment_buyw3"]
 ambient_light_source = 3
@@ -10,9 +11,6 @@ ambient_light_source = 3
 [sub_resource type="NavigationMesh" id="NavigationMesh_0siok"]
 vertices = PackedVector3Array(-49.5, 0.548992, -49, -49.5, 0.548992, 50, 49.5, 0.548992, 50, 49.5, 0.548992, -49)
 polygons = [PackedInt32Array(3, 2, 0), PackedInt32Array(0, 2, 1)]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_42evl"]
-albedo_color = Color(0.182764, 0.482239, 0, 1)
 
 [node name="Level" type="Node3D"]
 process_mode = 3
@@ -41,13 +39,11 @@ shadow_enabled = true
 process_mode = 1
 navigation_mesh = SubResource("NavigationMesh_0siok")
 
-[node name="Floor" type="CSGBox3D" parent="NavigationRegion3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0494918, 0.5)
-use_collision = true
-collision_layer = 3
-collision_mask = 3
-size = Vector3(100, 0.001, 100)
-material = SubResource("StandardMaterial3D_42evl")
+[node name="GridMap" type="GridMap" parent="NavigationRegion3D"]
+mesh_library = ExtResource("4_bhh2p")
+cell_size = Vector3(1, 1, 1)
+collision_layer = 65535
+collision_mask = 65535
 
 [node name="units" type="Node3D" parent="."]
 process_mode = 1

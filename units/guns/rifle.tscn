@@ -81,6 +81,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.06712, -0.642986)
 
 [node name="Cube_009" type="MeshInstance3D" parent="Mesh" index="0"]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
+cast_shadow = 0
 mesh = SubResource("ArrayMesh_o1oik")
 skeleton = NodePath("../..")
 surface_material_override/0 = ExtResource("1_4tff0")

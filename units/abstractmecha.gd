@@ -104,11 +104,7 @@ func hit(damage: int) -> void:
 
 func die():
 	tree.set("parameters/conditions/dead", true)
-	collision_layer = 2
-	input_ray_pickable = false
-	for bone in bones:
-		bone.collision_layer = 2
-		bone.input_ray_pickable = false
+	$CollisionShape3D.disabled = true
 
 func is_dead():
 	return health <= 0
