@@ -24,6 +24,11 @@ var state = STATE.GROUND
 @onready var body = $Root/Skeleton3D
 @onready var body_parts = [$Root/Skeleton3D/Arms, $Root/Skeleton3D/Head,
 							$Root/Skeleton3D/Legs, $Root/Skeleton3D/Torso]
+@onready var bones = [$Root/Skeleton3D/TorsoBone/Torso, $Root/Skeleton3D/HeadBone/Head,
+	$Root/Skeleton3D/ArmUpperLeft/LeftArm, $Root/Skeleton3D/ArmUpperRight/RightArm,
+	$Root/Skeleton3D/ArmLowerLeft/LeftArmLow, $Root/Skeleton3D/ArmLowerRight/RightArmLow,
+	$Root/Skeleton3D/LegUpperLeft/LeftLeg, $Root/Skeleton3D/LegUpperRight/RightLeg,
+	$Root/Skeleton3D/LegLowerLeft/LeftLegLow, $Root/Skeleton3D/LegLowerRight/RightLegLow]
 @onready var tree = $AnimationTree
 @onready var delay = $RechargeDelay
 @onready var tick = $RechargeTick
@@ -78,15 +83,14 @@ func _change_state(new_state: STATE):
 	if state == STATE.FALLING and new_state == STATE.GROUND:
 		sfx.play(sfx.AUDIO.LAND)
 
-func hit(damage: int):
-	# todo make this just for shield hits when hit anim is added.
-	shield_anim.play("effect")
-	
+
+func hit(damage: int) -> void:
 	# If recharging, reset timer. Otherwise, start recharge timer.
 	delay.start(delay.wait_time)
 	tick.stop()
 	# Damange shield first, overflow to health
 	if shield > 0:
+		shield_anim.play("effect")
 		shield -= damage
 		# Damage overflow from shield to health
 		if shield < 0:
@@ -100,8 +104,11 @@ func hit(damage: int):
 
 func die():
 	tree.set("parameters/conditions/dead", true)
-	collision_layer = 0
-	
+	collision_layer = 2
+	input_ray_pickable = false
+	for bone in bones:
+		bone.collision_layer = 2
+		bone.input_ray_pickable = false
 
 func is_dead():
 	return health <= 0

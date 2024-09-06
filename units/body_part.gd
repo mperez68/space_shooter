@@ -2,7 +2,7 @@ extends Area3D
 
 @export var multiplier = 1
 
-signal hit(damage: int)
+signal hit_signal(damage: int)
 
-func process_hit(dam: int):
-	hit.emit(dam * multiplier)
+func hit(dam: int):
+	hit_signal.emit(dam * multiplier)

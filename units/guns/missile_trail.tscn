@@ -1,0 +1,82 @@
+[gd_scene load_steps=9 format=3 uid="uid://og8cwer7d4qf"]
+
+[ext_resource type="Script" path="res://units/guns/missile_trail.gd" id="1_sao8t"]
+[ext_resource type="Material" uid="uid://blf3a64cbv1yw" path="res://assets/shot_hit.tres" id="2_bvuep"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yol8q"]
+transparency = 1
+albedo_color = Color(0, 0.898039, 0.898039, 0.494118)
+emission_enabled = true
+emission = Color(0.212174, 0.720845, 1, 1)
+emission_energy_multiplier = 4.0
+
+[sub_resource type="Animation" id="Animation_ej717"]
+resource_name = "fade"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:transparency")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+
+[sub_resource type="Animation" id="Animation_206a8"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:transparency")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ot75p"]
+_data = {
+"RESET": SubResource("Animation_206a8"),
+"fade": SubResource("Animation_ej717")
+}
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ovpx3"]
+transparency = 1
+albedo_color = Color(1, 1, 0, 0.384314)
+emission_enabled = true
+emission = Color(1, 1, 0, 1)
+emission_energy_multiplier = 8.0
+
+[sub_resource type="SphereMesh" id="SphereMesh_isobv"]
+material = SubResource("StandardMaterial3D_ovpx3")
+radius = 0.05
+height = 0.1
+
+[node name="MissileTrail" type="MeshInstance3D"]
+material_override = SubResource("StandardMaterial3D_yol8q")
+script = ExtResource("1_sao8t")
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+autostart = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_ot75p")
+}
+autoplay = "fade"
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="."]
+emitting = false
+one_shot = true
+explosiveness = 1.0
+process_material = ExtResource("2_bvuep")
+draw_pass_1 = SubResource("SphereMesh_isobv")
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

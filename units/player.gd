@@ -10,13 +10,10 @@ const BOB_FREQ = 2.0
 const BOB_AMP = 0.08
 var t_bob = 0.0
 
-var slug = load("res://units/guns/laser.tscn")
-var slug_instance
-
 @onready var head = $Head
 @onready var camera = $Head/Camera3D
-@onready var gun = $Head/Camera3D/Rifle/AnimationPlayer
-@onready var gun_barrel = $Head/Camera3D/Rifle/RayCast3D
+@onready var guns = [$Head/Camera3D/Rifle, $Head/Camera3D/Shotgun]
+@onready var gun: int = 0
 
 
 func _ready() -> void:
@@ -30,17 +27,16 @@ func _unhandled_input(event: InputEvent) -> void:
 		head.rotate_y(-event.relative.x * sensitivity)
 		body.rotate_y(-event.relative.x * sensitivity)
 		camera.rotate_x(-event.relative.y * sensitivity)
-		body_parts[1].rotate_x(-event.relative.y * sensitivity)
+		#body_parts[0].rotate_x(-event.relative.y * sensitivity)
+		#body_parts[1].rotate_x(-event.relative.y * sensitivity)
 		camera.rotation.x = clamp(camera.rotation.x, deg_to_rad(-90), deg_to_rad(90))
+	if event.is_action_pressed("swap_1"):
+		_swap_gun(0)
+	elif event.is_action_pressed("swap_2"):
+		_swap_gun(1)
 	
-	if event.is_action_pressed("shoot"):
-		if !gun.is_playing():
-			gun.play("shoot")
-			slug_instance = slug.instantiate()
-			slug_instance.position = gun_barrel.global_position
-			slug_instance.transform.basis = gun_barrel.global_transform.basis
-			get_parent().add_child(slug_instance)
-			
+	if event.is_action_pressed("shoot") and guns[gun].shoot():
+		sfx.play(sfx.AUDIO.SHOOT)
 
 # HUD/general tracking
 func _process(_delta: float) -> void:
@@ -139,6 +135,12 @@ func _headbob(time) -> Vector3:
 	pos.x = sin(time * BOB_FREQ / 2) * BOB_AMP
 	
 	return pos
+
+func _swap_gun(new_ptr: int = gun + 1):
+	guns[gun].visible = false
+	gun = new_ptr % guns.size()
+	guns[gun].visible = true
+	guns[gun].anim.play("draw_gun")
 
 func _on_boost_timer_timeout():
 	boosts = MAX_BOOSTS

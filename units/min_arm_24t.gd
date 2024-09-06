@@ -14,13 +14,14 @@ var target_range = [6, 20]
 func _ready() -> void:
 	super()
 	
-	player = get_node(player_path)
-	nav_agent.set_target_position(player.global_position)
+	if (get_node(player_path) != null):
+		player = get_node(player_path)
+		nav_agent.set_target_position(player.global_position)
 
 func _physics_process(delta: float) -> void:
 	super(delta)
 	
-	if is_dead():
+	if is_dead() or player == null:
 		return
 	
 	nav_agent.set_target_position(player.global_position)
@@ -38,6 +39,5 @@ func _physics_process(delta: float) -> void:
 		animate(Vector2.ZERO)
 	
 	look_at(Vector3(player.global_position.x, global_position.y, player.global_position.z), Vector3.UP)
-	
 	
 	move_and_slide()
