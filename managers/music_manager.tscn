@@ -9,8 +9,10 @@ script = ExtResource("1_6nsbx")
 
 [node name="intro" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("1_suxjd")
+bus = &"Music"
 
 [node name="loop" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_ae2bh")
+bus = &"Music"
 
 [connection signal="finished" from="intro" to="." method="_on_intro_finished"]

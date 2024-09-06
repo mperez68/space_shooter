@@ -12,17 +12,22 @@ script = ExtResource("1_65gnp")
 
 [node name="Jump" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("1_j5apd")
+bus = &"Sfx"
 
 [node name="Land" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("2_wgsef")
+bus = &"Sfx"
 
 [node name="Walk" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("3_v3t8p")
 volume_db = -17.0
 pitch_scale = 0.81
+bus = &"Sfx"
 
 [node name="Boost" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("4_vyhx8")
+bus = &"Sfx"
 
 [node name="Shoot" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("6_aev0g")
+bus = &"Sfx"

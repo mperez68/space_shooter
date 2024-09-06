@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://c7ggotjy0fhpa"]
+[gd_scene load_steps=4 format=3 uid="uid://c7ggotjy0fhpa"]
 
 [ext_resource type="Texture2D" uid="uid://v5blpqkgq1sm" path="res://assets/2d/temp-bg.jpg" id="1_gnykp"]
 [ext_resource type="PackedScene" uid="uid://cbemwcvyuq6pw" path="res://menu/menu_controller.tscn" id="1_oai4l"]
+[ext_resource type="PackedScene" uid="uid://b5jqk57hvukn4" path="res://managers/music_manager.tscn" id="2_p8ve4"]
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
@@ -20,6 +21,8 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("1_gnykp")
 expand_mode = 3
+
+[node name="MusicManager" parent="." instance=ExtResource("2_p8ve4")]
 
 [node name="MenuController" parent="." instance=ExtResource("1_oai4l")]
 layout_mode = 1

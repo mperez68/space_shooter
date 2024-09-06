@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://cbemwcvyuq6pw"]
+[gd_scene load_steps=12 format=3 uid="uid://cbemwcvyuq6pw"]
 
 [ext_resource type="Script" path="res://menu/menu_controller.gd" id="1_8nrub"]
 [ext_resource type="PackedScene" uid="uid://cn2758e84mwp8" path="res://menu/abstract_menu.tscn" id="3_rcvll"]
@@ -7,6 +7,7 @@
 [ext_resource type="Script" path="res://menu/char_select_menu.gd" id="5_bp2q6"]
 [ext_resource type="Script" path="res://menu/mission_select_menu.gd" id="6_wkak2"]
 [ext_resource type="Script" path="res://menu/settings_menu.gd" id="7_omgki"]
+[ext_resource type="AudioStream" uid="uid://by28i868sib2i" path="res://assets/sound/short_fire.wav" id="8_a3txo"]
 [ext_resource type="Script" path="res://menu/in_game_menu.gd" id="8_egr1j"]
 
 [sub_resource type="Gradient" id="Gradient_u20ar"]
@@ -501,11 +502,11 @@ layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.062
 anchor_top = 0.333
-anchor_right = 0.937
+anchor_right = 0.437
 anchor_bottom = 0.5
 offset_left = 0.199999
 offset_top = 0.199997
-offset_right = -199.8
+offset_right = 0.199982
 grow_horizontal = 2
 grow_vertical = 2
 text = "FULLSCREEN"
@@ -514,11 +515,11 @@ text = "FULLSCREEN"
 custom_minimum_size = Vector2(100, 100)
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.062
+anchor_left = 0.562
 anchor_top = 0.333
 anchor_right = 0.937
 anchor_bottom = 0.5
-offset_left = 200.2
+offset_left = 0.199982
 offset_top = 0.199997
 offset_right = 0.199982
 grow_horizontal = 2
@@ -546,8 +547,9 @@ anchors_preset = 10
 anchor_right = 1.0
 offset_bottom = 16.0
 grow_horizontal = 2
-value = 100.0
-rounded = true
+max_value = 1.0
+step = 0.001
+value = 1.0
 
 [node name="MusicAudio" type="HSlider" parent="Settings/AudioSliders"]
 layout_mode = 1
@@ -559,7 +561,9 @@ offset_top = -8.0
 offset_bottom = 8.0
 grow_horizontal = 2
 grow_vertical = 2
-value = 100.0
+max_value = 1.0
+step = 0.001
+value = 1.0
 
 [node name="SFXAudio" type="HSlider" parent="Settings/AudioSliders"]
 layout_mode = 1
@@ -570,7 +574,9 @@ anchor_bottom = 1.0
 offset_top = -16.0
 grow_horizontal = 2
 grow_vertical = 0
-value = 100.0
+max_value = 1.0
+step = 0.001
+value = 1.0
 
 [node name="AudioLabels" type="ColorRect" parent="Settings"]
 layout_mode = 1
@@ -633,6 +639,10 @@ grow_vertical = 2
 text = "BACK"
 
 [node name="SettingsManager" parent="Settings" instance=ExtResource("4_tj4f8")]
+
+[node name="Shoot" type="AudioStreamPlayer2D" parent="Settings"]
+stream = ExtResource("8_a3txo")
+bus = &"Sfx"
 
 [node name="InGame" parent="." instance=ExtResource("3_rcvll")]
 visible = false
@@ -725,6 +735,12 @@ text = "EXIT TO MENU"
 [connection signal="pressed" from="MissionSelect/Back" to="MissionSelect" method="_on_back_pressed"]
 [connection signal="pressed" from="MissionSelect/Start" to="MissionSelect" method="_on_start_pressed"]
 [connection signal="transition" from="Settings" to="." method="change_menu"]
+[connection signal="pressed" from="Settings/Fullscreen" to="Settings" method="_on_fullscreen_pressed"]
+[connection signal="pressed" from="Settings/Windowed" to="Settings" method="_on_windowed_pressed"]
+[connection signal="value_changed" from="Settings/AudioSliders/MasterAudio" to="Settings" method="_on_audio_value_changed" binds= [0]]
+[connection signal="value_changed" from="Settings/AudioSliders/MusicAudio" to="Settings" method="_on_audio_value_changed" binds= [1]]
+[connection signal="drag_ended" from="Settings/AudioSliders/SFXAudio" to="Settings" method="_on_sfx_audio_drag_ended"]
+[connection signal="value_changed" from="Settings/AudioSliders/SFXAudio" to="Settings" method="_on_audio_value_changed" binds= [2]]
 [connection signal="pressed" from="Settings/Back" to="Settings" method="_on_back_pressed"]
 [connection signal="close_menu" from="InGame" to="." method="close_menu"]
 [connection signal="transition" from="InGame" to="." method="change_menu"]
