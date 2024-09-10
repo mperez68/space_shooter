@@ -82,8 +82,9 @@ grow_horizontal = 2
 grow_vertical = 0
 theme_override_styles/background = ExtResource("1_06w16")
 theme_override_styles/fill = ExtResource("2_v1c65")
-step = 10.0
-value = 70.0
+max_value = 10.0
+step = 1.0
+value = 7.0
 show_percentage = false
 
 [node name="Border" type="TextureRect" parent="Fx/HP"]
@@ -113,8 +114,9 @@ grow_horizontal = 2
 grow_vertical = 0
 theme_override_styles/background = ExtResource("4_pc3b3")
 theme_override_styles/fill = ExtResource("5_p4ukc")
-step = 10.0
-value = 70.0
+max_value = 10.0
+step = 1.0
+value = 7.0
 show_percentage = false
 
 [node name="Border" type="TextureRect" parent="Fx/Shield"]

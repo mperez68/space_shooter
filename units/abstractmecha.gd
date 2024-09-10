@@ -29,6 +29,7 @@ var state = STATE.GROUND
 	$Root/Skeleton3D/ArmLowerLeft/LeftArmLow, $Root/Skeleton3D/ArmLowerRight/RightArmLow,
 	$Root/Skeleton3D/LegUpperLeft/LeftLeg, $Root/Skeleton3D/LegUpperRight/RightLeg,
 	$Root/Skeleton3D/LegLowerLeft/LeftLegLow, $Root/Skeleton3D/LegLowerRight/RightLegLow]
+@onready var right_hand_bone = $Root/Skeleton3D/RightHand
 @onready var tree = $AnimationTree
 @onready var delay = $RechargeDelay
 @onready var tick = $RechargeTick
@@ -36,6 +37,9 @@ var state = STATE.GROUND
 @onready var skeleton = $Root/Skeleton3D
 
 func _ready() -> void:
+	health = MAX_HEALTH
+	shield = MAX_SHIELD
+	
 	# turn body invisible if needed
 	if (!show_body):
 		for part in body_parts:

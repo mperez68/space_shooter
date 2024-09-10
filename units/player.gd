@@ -13,11 +13,17 @@ var t_bob = 0.0
 @onready var head = $Head
 @onready var camera = $Head/Camera3D
 @onready var guns = [$Head/Camera3D/Rifle, $Head/Camera3D/Shotgun]
+@onready var hud = $HUD
 @onready var gun: int = 0
 
 
 func _ready() -> void:
 	super()
+	
+	for g in guns:
+		g.world = get_parent().get_parent()
+	
+	hud.set_damage(health, shield)
 	
 	# lock mouse
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
@@ -114,6 +120,11 @@ func jump(boost: bool = false):
 		sfx.play(sfx.AUDIO.BOOST)
 	velocity.y = JUMP_VELOCITY
 	change_state(STATE.RISING)
+
+func hit(damage: int):
+	super(damage)
+	
+	hud.set_damage(health, shield)
 
 func _change_state(new_state: STATE):
 	super(new_state)

@@ -26,6 +26,7 @@ func _physics_process(delta):
 	
 	if ray.is_colliding():
 		if IS_PLAYER == ray.get_collider().is_in_group("player"):
+			print(IS_PLAYER, " == ", ray.get_collider().is_in_group("player"))
 			move(delta)
 			return
 		print("hit ", ray.get_collider())

@@ -3,6 +3,9 @@ extends AbstractMecha
 @export var player_path: NodePath
 
 @onready var nav_agent = $NavigationAgent3D
+@onready var shoot_timer = $ShootDelay
+@onready var aim_timer = $AimDelay
+@onready var gun = $Rifle
 
 enum DIRECTION { NONE, FORWARD, LEFT, RIGHT, BACK }
 
@@ -17,6 +20,8 @@ var direction_state = DIRECTION.NONE
 
 func _ready() -> void:
 	super()
+	
+	gun.world = get_parent().get_parent()
 	
 	if (get_node(player_path) != null):
 		player = get_node(player_path)
@@ -38,26 +43,23 @@ func _physics_process(delta: float) -> void:
 			aggro = true
 			print("aggro ", name)
 		
-		# Only approach if aggro is on
-		if aggro:
+		if aggro and aim_timer.is_stopped():
+			# Only approach if aggro is on
 			if d > aggro_range[0]:
-				print("forward")
 				direction_state = DIRECTION.FORWARD
+			## If stuck between two things, stop
+			elif $RightRayCast.is_colliding() and $LeftRayCast.is_colliding():
+				direction_state = DIRECTION.NONE
 			# Start Strafe
 			if (direction_state == DIRECTION.FORWARD and d <= aggro_range[0]):
-				print("right")
 				direction_state = DIRECTION.RIGHT
 			## Switch strafe direction if blocked
 			if direction_state == DIRECTION.RIGHT and $RightRayCast.is_colliding():
-				print("left")
 				direction_state = DIRECTION.LEFT
 			if direction_state == DIRECTION.LEFT and $LeftRayCast.is_colliding():
-				print("right")
 				direction_state = DIRECTION.RIGHT
-			## If stuck between two things, stop
-			if $RightRayCast.is_colliding() and $LeftRayCast.is_colliding():
-				print("stop")
-				direction_state = DIRECTION.NONE
+		else:
+			direction_state = DIRECTION.NONE
 		
 		# move based on current state
 		var new_move = get_move_from_state(move)
@@ -65,7 +67,9 @@ func _physics_process(delta: float) -> void:
 		velocity.z = new_move.z
 		animate(get_anim_from_state())
 		
-		look_at(Vector3(player.global_position.x, global_position.y, player.global_position.z), Vector3.UP)
+		if aim_timer.is_stopped():
+			gun.look_at(Vector3(player.global_position.x, player.global_position.y + 1.0, player.global_position.z), Vector3.UP)
+			look_at(Vector3(player.global_position.x, global_position.y, player.global_position.z), Vector3.UP)
 	
 	if !is_dead() or !is_on_floor():
 		move_and_slide()
@@ -101,3 +105,16 @@ func hit(damage: int) -> void:
 	if !aggro:
 		aggro = true
 		print("hit(): aggro ", name)
+
+
+func _on_shoot_delay_timeout() -> void:
+	shoot_timer.start(RandomNumberGenerator.new().randf_range(1.0, 3.0))
+	if !is_dead():
+		aim_timer.start()
+
+
+func _on_aim_delay_timeout() -> void:
+	if aggro:
+		direction_state = DIRECTION.FORWARD
+		sfx.play(sfx.AUDIO.SHOOT)
+		gun.shoot()
